@@ -1,0 +1,14 @@
+<div class="section">
+  <h1 class="title">All lists</h1>
+  <h2 class="subtitle">Here is a list of all the lists!</h2>
+
+  <ul>
+    <% lists.forEach(list => { %>
+      <li>
+        <h3 class="title is-4"><a href="/lists/<%= list.id %>"><%= list.title %></a></h3>
+        <p class="subtitle is-6">By <%= list.createdBy.username %></p>
+        <br>
+      </li>
+    <% }) %>
+  </ul>
+</div>
