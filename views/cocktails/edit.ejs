@@ -1,0 +1,37 @@
+<%- include ../partials/_header %>
+
+
+
+<div class="container">
+  <div class="row">
+    <form class="col-md-6" method="POST" action="/cocktails/<%= cocktail.id %>">
+      <input type="hidden" name="_method" value="PUT">
+      <h1>Submit an update</h1>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="exampleInputText1" placeholder="Cocktail Name" name="name" value="<%= cocktail.name %>">
+      </div>
+      <div class="form-group">
+        <label for="alcoholBase">Alcohol Base</label>
+        <input type="text" class="form-control" name="alcoholBase" id="alcoholBase" placeholder="base alcohol" value="<%= cocktail.alcoholBase %>">
+      </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="text" class="form-control" name="image" id="image" placeholder="URL" value="<%= cocktail.image %>">
+      </div>
+      <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <textarea class="form-control" name="ingredients" id="ingredients" rows="3"><%= cocktail.ingredients %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="method">How to mix it</label>
+        <textarea class="form-control" name="recipe" id="recipe" rows="3"><%= cocktail.recipe %></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="terms-and-conditions"><small>I agree to the Terms &amp; Conditions</small></label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Update cocktail</button>
+    </form>
+  </div>
+</div>

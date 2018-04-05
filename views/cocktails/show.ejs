@@ -1,0 +1,26 @@
+<%- include ../partials/_header %>
+
+<main class="container">
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <img class="card-img-top" <img src="<%= cocktail.image %>" alt="<%= cocktail.name %>" class="img-thumbnail">
+      <div class="card-header">
+        <h2><%= cocktail.name %></h2>
+        <h5>Alcohol base: <%= cocktail.alcoholBase %></h5>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Ingredients: <%= cocktail.ingredients %></h5>
+        <p class="card-text">Mix it: <%= cocktail.recipe %></p>
+        <a href="/cocktails/<%= cocktail.id %>/edit" class="btn btn-outline-primary btn-lg btn-block">Edit</a>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/cocktails/<%= cocktail.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

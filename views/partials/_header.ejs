@@ -1,0 +1,46 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"><i class="fas fa-glass-martini"></i> MixIt</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cocktails">All recipes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cocktails/new">Add cocktail</a>
+        </li>
+        <% if (locals.isLoggedIn) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout <i class="fas fa-sign-out-alt"></i></a>
+          </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login"><i class="fas fa-user"></i> Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register"><i class="fas fa-user-plus"></i> Register</a>
+        </li>
+        <% } %>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search cocktail" aria-label="Search" name="search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Go!</button>
+      </form>
+    </div>
+  </nav>
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">MixIt</h1>
+        <p class="lead">Cocktail happy hour at your fingertip</p>
+      </div>
+    </div>
+    <% for (const type in messages) { %>
+      <p class="alert alert-<%= type %>"><%= messages[type] %></p>
+    <% } %>
+</header>
