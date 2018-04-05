@@ -11,15 +11,20 @@
   <% include ./partials/_navbar %>
 
   <div class="container">
-      <% for(const type in messages) { %>
-        <br>
-        <div class="notification is-<%= type %>">
-          <p><%= messages[type] %></p>
-        </div>
+    <% for(const type in messages) { %>
+      <br>
+      <div class="notification is-<%= type %>">
+        <p><%= messages[type] %></p>
+      </div>
       <% } %>
-      
-  <main>
-    <%- body %>
-  </main>
+
+      <main>
+        <%- body %>
+      </main>
+    </div>
+    <footer class="footer">
+      <p>Made by <a href="https://www.linkedin.com/in/alinchindea/"> Alin</a> 2018 📝</p>
+    </footer>
+
 </body>
 </html>

@@ -21,7 +21,9 @@ body {
 }
 
 .navbar {
-  background-color: rgba(0, 0, 0, .2);
+  background: #EDE574;
+  background: -webkit-linear-gradient(to right, #E1F5C4, #EDE574);
+  background: linear-gradient(to right, #E1F5C4, #EDE574);
   display: flex;
   padding: 16px;
   color: #fff;
@@ -73,4 +75,20 @@ body {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+}
+
+.footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 10px;
+  padding: 1rem 0.5rem 1rem;
+}
+
+footer {
+  background: #EDE574;
+  background: -webkit-linear-gradient(to right, #E1F5C4, #EDE574);
+  background: linear-gradient(to right, #E1F5C4, #EDE574);
+  color: #000;
+  display: flex;
+  justify-content: center;
 }
