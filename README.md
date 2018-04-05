@@ -14,7 +14,7 @@ This is a fully RESTful Express app, that includes full CRUD actions (Create, Re
 
 ## Style
 
-Styling it up using Bulma and pure flexbox
+Styling it up using Bootstrap overall and pure flexbox for a responsive navbar
 
 ## Express Authentication
 

@@ -2,26 +2,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  username: String,
-  email: String,
+  email: { type: String, required: true, trim: true, unique: true },
+  username: { type: String, required: true, trim: true, unique: true },
   password: { type: String, required: true }
 });
 
-userSchema.virtual('passwordConfirmation')
+userSchema
+  .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;
   });
 
 userSchema.pre('validate', function checkPassword(next) {
   if(this.isModified('password') && this._passwordConfirmation !== this.password ) {
-    this.invalidate('passwordConfirmation', 'does not match'); //invalidate is a mongoose method
-  }
-  next();
-});
-
-userSchema.pre('validate', function checkPassword(next) {
-  if(this.isModified('password') && this._passwordConfirmation !== this.password ) {
-    this.invalidate('passwordConfirmation', 'does not match'); //invalidate is a mongoose method
+    this.invalidate('passwordConfirmation', 'does not match');
   }
   next();
 });

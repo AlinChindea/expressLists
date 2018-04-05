@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Alin Chindea <hello@alinchindea.com> (https://github.com/EagleEye182)",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
