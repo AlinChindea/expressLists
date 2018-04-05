@@ -1,25 +1,23 @@
 const User = require('../models/user');
 
 function newRoute(req, res) {
-  res.render('registrations/new');
+  return res.render('registrations/new');
 }
 
-function createRoute(req, res){
+function createRoute(req, res, next) {
   User
     .create(req.body)
     .then((user) => {
-      req.flash('info', `Thanks for registering, ${user.username}! Please login 🔏`);
+      req.flash('info', `Thanks for registering, ${user.username}! Now please login.`);
       res.redirect('/login');
     })
     .catch((err) => {
       if(err.name === 'ValidationError') {
-        return res.status(400).render('registrations/new', { message: 'Passwords do not match 🤦🏻‍♂️' });
+        return res.badRequest('/register', err.toString());
       }
-      res.status(500).end();
+      next(err);
     });
 }
-
-
 
 module.exports = {
   new: newRoute,

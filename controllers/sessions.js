@@ -1,35 +1,32 @@
 const User = require('../models/user');
 
-function newSession(req, res) {
+function sessionsNew(req, res) {
   res.render('sessions/new');
 }
 
-function createSession(req, res) {
+function sessionsCreate(req, res, next) {
   User
     .findOne({ email: req.body.email })
-    .exec()
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) {
-        return res.status(401).render('sessions/new', { message: 'Unrecognized credentials 🙅🏻‍♀️🙅🏾‍♂️'});
+        req.flash('danger', 'Unknown email/password combination');
+        return res.redirect('/login');
       }
 
       req.session.userId = user.id;
-      req.flash('info', `Welcome, ${user.username}! 🍸`);
+
+      req.flash('info', `Welcome back, ${user.username}!`);
       res.redirect('/');
     })
-    .catch(() => {
-      res.status(500).end();
-    });
+    .catch(next);
 }
 
-function deleteSession(req, res) {
-  return req.session.regenerate(() => {
-    res.redirect('/');
-  });
+function sessionsDelete(req, res) {
+  req.session.regenerate(() => res.redirect('/'));
 }
 
 module.exports = {
-  new: newSession,
-  create: createSession,
-  delete: deleteSession
+  new: sessionsNew,
+  create: sessionsCreate,
+  delete: sessionsDelete
 };

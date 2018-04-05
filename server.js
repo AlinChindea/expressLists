@@ -2,25 +2,25 @@ const express        = require('express');
 const morgan         = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser     = require('body-parser');
-const methodOverride = require('method-override');
 const mongoose       = require('mongoose');
-mongoose.Promise     = require('bluebird');
+const methodOverride = require('method-override');
 const session        = require('express-session');
-const User           = require('./models/user');
 const flash          = require('express-flash');
-
-const app            = express();
 const router         = require('./config/routes');
+const customResponses = require('./lib/customResponses');
+const authentication = require('./lib/authentication');
+const errorHandler = require('./lib/errorHandler');
 
+const app = express();
 const { port, dbURI, sessionSecret } = require('./config/environment');
+
+mongoose.Promise = require('bluebird');
 mongoose.connect(dbURI);
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
-
 app.use(expressLayouts);
 app.use(express.static(`${__dirname}/public`));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.use(session({
@@ -30,6 +30,8 @@ app.use(session({
 }));
 
 app.use(flash());
+app.use(customResponses);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(methodOverride((req) => {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -39,25 +41,8 @@ app.use(methodOverride((req) => {
   }
 }));
 
-app.use((req, res, next) => {
-  if (!req.session.userId) return next();
-
-  User
-    .findById(req.session.userId)
-    .exec()
-    .then((user) => {
-      if(!user) {
-        return req.session.regenerate(() => {
-          res.redirect('/');
-        });
-      }
-
-      res.locals.user = user;
-      res.locals.isLoggedIn = true;
-
-      next();
-    });
-});
+app.use(authentication);
 app.use(router);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Express is listening on port ${port}`));

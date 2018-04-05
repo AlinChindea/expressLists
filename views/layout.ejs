@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>RESTful App</title>
   <% include ./partials/_stylesheets.ejs %>
 
 </head>
 <body>
   <% include ./partials/_navbar %>
+
+  <div class="container">
+      <% for(const type in messages) { %>
+        <br>
+        <div class="notification is-<%= type %>">
+          <p><%= messages[type] %></p>
+        </div>
+      <% } %>
+      
   <main>
     <%- body %>
   </main>

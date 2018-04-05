@@ -1,1 +1,1 @@
-"use strict";console.log("JS Loaded");
+"use strict";window.addEventListener("DOMContentLoaded",function(){document.querySelector(".navbar-burger").addEventListener("click",function(){document.querySelectorAll(".navbar-items").forEach(function(e){return e.classList.toggle("navbar-burgerToggle")})})});
