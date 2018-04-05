@@ -1,25 +1,31 @@
 e<% if(locals.message) { %>
-  <div class="alert alert-primary" role="alert">
+  <div class="notification is-info" role="alert">
     <%= message %>
   </div>
 <% } %>
 
 <%- include ../partials/_header %>
 
-<div class="container">
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    <form method="POST" action="/login">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" placeholder="Email" name="email">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password">
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">Login</button>
-    </form>
+<div class="section">
+  <h1 class="title">Login</h1>
+
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <form method="POST" action="/login">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="control">
+            <input class="input" type="text" name="email" id="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <div class="control">
+            <input class="input" type="password" name="password" id="password" required>
+          </div>
+        </div>
+        <button class="button is-link">Login</button>
+      </form>
+    </div>
   </div>
-</div>
 </div>
