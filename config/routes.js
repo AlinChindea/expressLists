@@ -1,28 +1,32 @@
-const express = require('express');
-const router  = express.Router();
-const cocktails = require('../controllers/cocktails');
-
-const registrations = require('../controllers/registrations');
+const router = require('express').Router();
 const sessions = require('../controllers/sessions');
+const registrations = require('../controllers/registrations');
+const lists = require('../controllers/lists');
+const secureRoute = require('../lib/secureRoute');
 
-function secureRoute(req, res, next) {
-  if (!req.session.userId) {
-    return req.session.regenerate(() => {
-      req.flash('danger', 'You must be logged in.');
-      res.redirect('/login');
-    });
-  }
+router.get('/', (req, res) => res.render('statics/index'));
 
-  return next();
-}
 
-// A landing page route
-router.route('/')
-  .get(cocktails.home);
+router.route('/lists')
+  .get(lists.index)
+  .post(secureRoute, lists.create);
 
-//search route
-router.route('/search')
-  .get(cocktails.search);
+router.route('/lists/new')
+  .get(secureRoute, lists.new);
+
+router.route('/lists/:id')
+  .get(lists.show)
+  .put(secureRoute, lists.update)
+  .delete(secureRoute, lists.delete);
+
+router.route('/lists/:id/edit')
+  .get(secureRoute, lists.edit);
+
+router.route('/lists/:id/items')
+  .post(secureRoute, lists.createItem);
+
+router.route('/lists/:id/items/:itemId')
+  .delete(secureRoute, lists.deleteItem);
 
 router.route('/register')
   .get(registrations.new)
@@ -35,20 +39,6 @@ router.route('/login')
 router.route('/logout')
   .get(sessions.delete);
 
-router.route('/cocktails')
-  .get(cocktails.index)
-  .post(secureRoute, cocktails.create);
-
-router.route('/cocktails/new')
-  .get(secureRoute, cocktails.new);
-
-router.route('/cocktails/:id')
-  .get(cocktails.show)
-  .put(secureRoute, cocktails.update)
-  .delete(secureRoute, cocktails.delete);
-
-router.route('/cocktails/:id/edit')
-  .get(secureRoute, cocktails.edit);
-
+router.all('*', (req, res) => res.notFound());
 
 module.exports = router;
