@@ -15,7 +15,7 @@ function createSession(req, res) {
 
       req.session.userId = user.id;
       req.flash('info', `Welcome, ${user.username}! 🍸`);
-      res.redirect('/cocktails');
+      res.redirect('/');
     })
     .catch(() => {
       res.status(500).end();
@@ -24,7 +24,7 @@ function createSession(req, res) {
 
 function deleteSession(req, res) {
   return req.session.regenerate(() => {
-    res.redirect('/cocktails');
+    res.redirect('/');
   });
 }
 
