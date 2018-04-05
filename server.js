@@ -1,4 +1,5 @@
 const express        = require('express');
+const morgan         = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser     = require('body-parser');
 const methodOverride = require('method-override');
@@ -6,12 +7,12 @@ const mongoose       = require('mongoose');
 mongoose.Promise     = require('bluebird');
 const session        = require('express-session');
 const User           = require('./models/user');
-const flash = require('express-flash');
+const flash          = require('express-flash');
 
 const app            = express();
 const router         = require('./config/routes');
 
-const { port, dbURI } = require('./config/environment');
+const { port, dbURI, sessionSecret } = require('./config/environment');
 mongoose.connect(dbURI);
 
 app.set('view engine', 'ejs');
@@ -20,9 +21,10 @@ app.set('views', `${__dirname}/views`);
 app.use(expressLayouts);
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'shh it is a secret',
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false
 }));
@@ -58,4 +60,4 @@ app.use((req, res, next) => {
 });
 app.use(router);
 
-app.listen(port, () => console.log(`Express is listening to port ${port}`));
+app.listen(port, () => console.log(`Express is listening on port ${port}`));
