@@ -1,6 +1,6 @@
 <div class="navbar">
     <div class="navbar-item navbar-logo">
-      <a href="/">Home</a>
+      <a href="/"><i class="fas fa-home"></i> </a>
     </div>
     <div class="navbar-link navbar-burger">
       <i class="fas fa-bars"></i>
@@ -8,20 +8,20 @@
     <nav class="navbar-items navbar-items-right">
       <% if(locals.isLoggedIn) { %>
       <div>
-        <a href="/lists" class="navbar-item">Lists</a>
+        <a href="/lists" class="navbar-item"><i class="fas fa-list-ol"></i>Lists</a>
       </div>
       <div>
-        <a href="/lists/new" class="navbar-item">Add a list</a>
+        <a href="/lists/new" class="navbar-item"><i class="fas fa-plus"></i>Add a list</a>
       </div>
       <div>
-        <a href="/logout" class="navbar-item">Logout</a>
+        <a href="/logout" class="navbar-item"><i class="fas fa-sign-out-alt"></i>Logout</a>
       </div>
       <% } else { %>
       <div>
-        <a href="/register" class="navbar-item">Register</a>
+        <a href="/register" class="navbar-item"><i class="fas fa-user-plus"></i>  Register</a>
       </div>
       <div>
-        <a href="/login" class="navbar-item">Login</a>
+        <a href="/login" class="navbar-item"><i class="fas fa-sign-in-alt"></i> Login</a>
       </div>
       <% } %>
     </nav>

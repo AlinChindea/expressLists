@@ -1,10 +1,10 @@
 <div class="section">
-  <h1 class="title"><%= list.title %></h1>
-  <h2 class="subtitle">By <%= list.createdBy.username %></h2>
+  <h1 class="title"><%= list.title %> <button class="button is-small is-danger"><i class="fas fa-trash-alt"></i></button></h1>
+  <h2 class="subtitle">Created by <%= list.createdBy.username %></h2>
   <% if(locals.isLoggedIn && list.belongsTo(user)) { %>
     <form method="POST" action="/lists/<%= list.id %>">
       <input type="hidden" name="_method" value="DELETE">
-      <button class="button is-small">Delete list</button>
+
     </form>
   <% } %>
   <br>

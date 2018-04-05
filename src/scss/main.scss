@@ -5,11 +5,6 @@
 @import 'partials/base';
 @import 'partials/typography';
 
-
-// Components
-@import 'components/header';
-@import 'components/homepage';
-
 * {
   box-sizing: border-box;
 }
@@ -68,4 +63,14 @@ body {
     position: absolute;
     cursor: pointer;
   }
+}
+
+.svg-inline--fa {
+  margin-right: 2px;
+}
+
+.notification > form > .delete {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
 }
